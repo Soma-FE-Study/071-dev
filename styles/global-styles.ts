@@ -2,6 +2,10 @@ import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
 
 export const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: "Stardust";
+    src: url('fonts/stardust.ttf');
+  }
   ${normalize}
   html {
     box-sizing: border-box;
@@ -13,6 +17,6 @@ export const GlobalStyle = createGlobalStyle`
   *::after {
     box-sizing: inherit;
   }
-  * { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';}
+  * { font-family: 'Stardust', 'Sans-serif';}
   a { cursor: pointer; text-decoration: none; }
 `;
