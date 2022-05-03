@@ -5,9 +5,6 @@ import styled from 'styled-components';
 const Home: NextPage = () => {
   return (
     <HomeBlock>
-      <Head>
-        <title>071's porfolio</title>
-      </Head>
       <div>
         <h1>071's very first portfolio</h1>
       </div>
