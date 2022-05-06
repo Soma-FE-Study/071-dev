@@ -15,7 +15,11 @@ export default function Background({ children }: { children: ReactElement }) {
   //       ctx.drawImage(image, 0, 0);
   //     };
   //   }, [canvasRef]);
-  return <BackgroundCanvas className='background'>{children}</BackgroundCanvas>;
+  return (
+    <BackgroundCanvas id='top' className='background'>
+      {children}
+    </BackgroundCanvas>
+  );
 }
 
 const BackgroundCanvas = styled.div`
