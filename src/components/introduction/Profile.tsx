@@ -1,18 +1,17 @@
 import styled from 'styled-components';
+import Image from 'next/image';
 
 export default function Profile() {
   return (
     <ImgContainer>
-      <img className='img' src='/img/yoon.png' />
+      <Image className='profileImg' src='/img/yoon.png' width='300' height='300' />
     </ImgContainer>
   );
 }
 
 const ImgContainer = styled.div`
-  .img {
-    padding: 20%;
-    width: 30rem;
-    height: 30rem;
-    border-radius: 70%;
+  padding: 60px;
+  .profileImg {
+    border-radius: 50%;
   }
 `;

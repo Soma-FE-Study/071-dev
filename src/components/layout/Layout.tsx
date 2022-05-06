@@ -4,8 +4,6 @@ import Footer from './Footer';
 import { darkTheme, lightTheme } from '../../../styles/theme';
 import styled, { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../../../styles/global-styles';
-import IntroductionContainer from '../introduction/introductionContainer';
-import AboutMe from '../about/AboutMe';
 
 interface IProps {
   children: React.ReactNode;
@@ -16,10 +14,7 @@ export default function Layout({ children }: IProps) {
     <>
       <ThemeProvider theme={darkTheme}>
         <GlobalStyle />
-        <Main>
-          <IntroductionContainer></IntroductionContainer>
-          <AboutMe></AboutMe>
-        </Main>
+        <Main>{children}</Main>
         <Footer />
       </ThemeProvider>
     </>

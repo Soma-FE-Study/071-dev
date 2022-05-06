@@ -1,16 +1,16 @@
 import type { NextPage } from 'next';
 import styled from 'styled-components';
+import Background from '../src/components/main-page/Background';
+import Character from '../src/components/main-page/character';
 
 const Home: NextPage = () => {
-  return <></>;
+  return (
+    <>
+      <Background>
+        <Character />
+      </Background>
+    </>
+  );
 };
-
-const HomeBlock = styled.div`
-  padding: 0 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
 export default Home;
