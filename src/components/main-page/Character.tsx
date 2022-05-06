@@ -118,6 +118,20 @@ export default function Character() {
         setPosition({ ...position, y: position.y - 20 });
       }
     }
+
+    if (position.y <= heightMax.current * 0.3 && position.x <= widthMax.current * 0.15) {
+      console.log('move to first page');
+      setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
+    } else if (position.y <= heightMax.current * 0.3 && position.x >= widthMax.current * 0.8) {
+      console.log('move to second page');
+      setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
+    } else if (position.y >= heightMax.current * 0.7 && position.x <= widthMax.current * 0.15) {
+      console.log('move to third page');
+      setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
+    } else if (position.y >= heightMax.current * 0.7 && position.x >= widthMax.current * 0.8) {
+      console.log('move to fourth page');
+      setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
+    }
   };
 
   useEffect(() => {

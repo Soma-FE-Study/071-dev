@@ -7,6 +7,6 @@ export default function AboutMe() {
 const Container = styled.div`
   background-color: #68a7ad;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   color: #eee4ab;
 `;
