@@ -4,7 +4,7 @@ import Profile from './Profile';
 
 export default function IntroductionContainer() {
   return (
-    <Container>
+    <Container id='intro'>
       <Profile />
       <AutoIntroduce />
     </Container>

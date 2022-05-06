@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export default function AboutMe() {
-  return <Container>ABOUT ME</Container>;
+export default function MainProject() {
+  return <Container id='project'>ABOUT ME</Container>;
 }
 
 const Container = styled.div`
