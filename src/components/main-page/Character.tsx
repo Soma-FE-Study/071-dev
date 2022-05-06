@@ -140,11 +140,21 @@ export default function Character() {
   return (
     <Container ref={containerRef}>
       <CharacterContainer style={{ left: `${position.x}px`, top: `${position.y}px` }}>
+        <Nickname>영기</Nickname>
         <Image src={img} width='100' height='100' />
       </CharacterContainer>
     </Container>
   );
 }
+
+const Nickname = styled.div`
+  background-color: white;
+  width: 50%;
+  font-family: sans-serif;
+  border-radius: 30px;
+  font-size: 15px;
+  text-align: center;
+`;
 
 const Container = styled.div`
   position: relative;
@@ -154,5 +164,9 @@ const Container = styled.div`
 
 const CharacterContainer = styled.div`
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   top: 50px;
 `;
