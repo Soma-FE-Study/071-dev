@@ -7,21 +7,36 @@ export default function Character() {
   const [img, setImg] = useState('/img/character-standing-high.png');
   const [dir, setDir] = useState(0); //0 -> stand, 1 -> right, 2 -> left
   const [imgCnt, setImgCnt] = useState(0); // 0, 1, 2, 3
+  const [keyPressed, setKeyPressed] = useState({ right: 0, left: 0, up: 0, down: 0 });
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   let heightMax = useRef(0);
   let widthMax = useRef(0);
 
+  const removeKey = (event: KeyboardEvent) => {
+    event.preventDefault();
+    if (event.key === 'ArrowRight') {
+      setKeyPressed({ ...keyPressed, right: 0 });
+    } else if (event.key === 'ArrowLeft') {
+      setKeyPressed({ ...keyPressed, left: 0 });
+    } else if (event.key === 'ArrowDown') {
+      setKeyPressed({ ...keyPressed, down: 0 });
+    } else if (event.key === 'ArrowUp') {
+      setKeyPressed({ ...keyPressed, up: 0 });
+    }
+  };
+
   const keyHandler = (event: KeyboardEvent) => {
     event.preventDefault();
+    console.log(keyPressed);
     const hMAX = heightMax.current;
     const wMAX = widthMax.current;
 
     if (event.key === 'ArrowRight') {
-      if (position.x >= wMAX - 100) {
+      setKeyPressed({ ...keyPressed, right: 1 });
+      if (position.x >= wMAX - 100 || position.y >= hMAX - 130 || position.y <= 10) {
         return;
       }
-
       if (dir === 1) {
         setImgCnt((imgCnt + 1) % 4);
       } else {
@@ -29,10 +44,16 @@ export default function Character() {
         setImgCnt(0);
       }
       setImg(`/img/character-right-${imgCnt}-high.png`);
-
-      setPosition({ ...position, x: position.x + 20 });
+      if (keyPressed.down) {
+        setPosition({ ...position, x: position.x + 20, y: position.y + 20 });
+      } else if (keyPressed.up) {
+        setPosition({ ...position, x: position.x + 20, y: position.y - 20 });
+      } else {
+        setPosition({ ...position, x: position.x + 20 });
+      }
     } else if (event.key === 'ArrowLeft') {
-      if (position.x <= 10) {
+      setKeyPressed({ ...keyPressed, left: 1 });
+      if (position.x <= 10 || position.y >= hMAX - 130 || position.y <= 10) {
         return;
       }
 
@@ -43,10 +64,16 @@ export default function Character() {
         setImgCnt(0);
       }
       setImg(`/img/character-left-${imgCnt}-high.png`);
-
-      setPosition({ ...position, x: position.x - 20 });
+      if (keyPressed.up) {
+        setPosition({ ...position, x: position.x - 20, y: position.y - 20 });
+      } else if (keyPressed.down) {
+        setPosition({ ...position, x: position.x - 20, y: position.y + 20 });
+      } else {
+        setPosition({ ...position, x: position.x - 20 });
+      }
     } else if (event.key === 'ArrowDown') {
-      if (position.y >= hMAX - 130) {
+      setKeyPressed({ ...keyPressed, down: 1 });
+      if (position.y >= hMAX - 130 || position.x <= 10 || position.x >= wMAX - 100) {
         return;
       }
 
@@ -60,10 +87,16 @@ export default function Character() {
       } else {
         setImg(`/img/character-left-${imgCnt}-high.png`);
       }
-
-      setPosition({ ...position, y: position.y + 20 });
+      if (keyPressed.right) {
+        setPosition({ ...position, x: position.x + 20, y: position.y + 20 });
+      } else if (keyPressed.left) {
+        setPosition({ ...position, x: position.x - 20, y: position.y + 20 });
+      } else {
+        setPosition({ ...position, y: position.y + 20 });
+      }
     } else if (event.key === 'ArrowUp') {
-      if (position.y <= 10) {
+      setKeyPressed({ ...keyPressed, up: 1 });
+      if (position.y <= 10 || position.x <= 10 || position.x >= wMAX - 100) {
         return;
       }
 
@@ -77,15 +110,22 @@ export default function Character() {
       } else {
         setImg(`/img/character-left-${imgCnt}-high.png`);
       }
-
-      setPosition({ ...position, y: position.y - 20 });
+      if (keyPressed.right) {
+        setPosition({ ...position, x: position.x + 20, y: position.y - 20 });
+      } else if (keyPressed.left) {
+        setPosition({ ...position, x: position.x - 20, y: position.y - 20 });
+      } else {
+        setPosition({ ...position, y: position.y - 20 });
+      }
     }
   };
 
   useEffect(() => {
     window.addEventListener('keydown', keyHandler);
+    window.addEventListener('keyup', removeKey);
     return () => {
       window.removeEventListener('keydown', keyHandler);
+      window.removeEventListener('keyup', removeKey);
     };
   });
 
