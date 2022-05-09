@@ -10,8 +10,8 @@ export default function Character() {
   const [keyPressed, setKeyPressed] = useState({ right: 0, left: 0, up: 0, down: 0 });
 
   const containerRef = useRef<HTMLDivElement | null>(null);
-  let heightMax = useRef(0);
-  let widthMax = useRef(0);
+  const heightMax = useRef(0);
+  const widthMax = useRef(0);
 
   const removeKey = (event: KeyboardEvent) => {
     event.preventDefault();
