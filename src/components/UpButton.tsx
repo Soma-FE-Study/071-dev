@@ -21,12 +21,14 @@ const Up = styled.div`
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 1);
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   .img {
     opacity: 100%;
   }
