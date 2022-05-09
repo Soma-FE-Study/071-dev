@@ -123,18 +123,22 @@ export default function Character() {
       const intro = document.getElementById('intro');
       if (intro) intro.scrollIntoView({ behavior: 'smooth' });
       setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
+      setImg('/img/character-standing-high.png');
     } else if (position.y <= heightMax.current * 0.3 && position.x >= widthMax.current * 0.8) {
       const project = document.getElementById('project');
       if (project) project.scrollIntoView({ behavior: 'smooth' });
       setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
+      setImg('/img/character-standing-high.png');
     } else if (position.y >= heightMax.current * 0.7 && position.x <= widthMax.current * 0.15) {
       const skillStack = document.getElementById('skillStack');
       if (skillStack) skillStack.scrollIntoView({ behavior: 'smooth' });
       setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
+      setImg('/img/character-standing-high.png');
     } else if (position.y >= heightMax.current * 0.7 && position.x >= widthMax.current * 0.8) {
       const contact = document.getElementById('contact');
       if (contact) contact.scrollIntoView({ behavior: 'smooth' });
       setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
+      setImg('/img/character-standing-high.png');
     }
   };
 
