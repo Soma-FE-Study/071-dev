@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Image from 'next/image';
-import { useEffect } from 'react';
 
 export default function UpButton() {
   function goUp() {
@@ -9,7 +8,7 @@ export default function UpButton() {
   }
   return (
     <Up onClick={goUp}>
-      <Image className='img' width='80px' height='80px' src='/img/up.png' />
+      <Image alt='upButton' className='img' width='80px' height='80px' src='/img/up.png' />
     </Up>
   );
 }

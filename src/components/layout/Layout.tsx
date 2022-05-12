@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
-import Head from 'next/head';
+import React from 'react';
 import Footer from './Footer';
-import { darkTheme, lightTheme } from '../../../styles/theme';
+import { darkTheme } from '../../../styles/theme';
 import styled, { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../../../styles/global-styles';
 

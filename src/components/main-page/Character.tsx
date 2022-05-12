@@ -163,7 +163,7 @@ export default function Character() {
     <Container ref={containerRef}>
       <CharacterContainer style={{ left: `${position.x}px`, top: `${position.y}px` }}>
         <Nickname>영기</Nickname>
-        <Image src={img} width='100' height='100' />
+        <Image src={img} alt='character' width='100' height='100' />
       </CharacterContainer>
     </Container>
   );
