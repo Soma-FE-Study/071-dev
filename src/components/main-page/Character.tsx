@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export default function Character() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [img, setImg] = useState('/img/character-standing-high.png');
+  const [img, setImg] = useState('/img/character-standing.png');
   const [dir, setDir] = useState(0); //0 -> stand, 1 -> right, 2 -> left
   const [imgCnt, setImgCnt] = useState(0); // 0, 1, 2, 3
   const [keyPressed, setKeyPressed] = useState({ right: 0, left: 0, up: 0, down: 0 });
@@ -43,7 +43,7 @@ export default function Character() {
         setDir(1);
         setImgCnt(0);
       }
-      setImg(`/img/character-right-${imgCnt}-high.png`);
+      setImg(`/img/character-right-${imgCnt}.png`);
       if (keyPressed.down) {
         setPosition({ ...position, x: position.x + 20, y: position.y + 20 });
       } else if (keyPressed.up) {
@@ -63,7 +63,7 @@ export default function Character() {
         setDir(2);
         setImgCnt(0);
       }
-      setImg(`/img/character-left-${imgCnt}-high.png`);
+      setImg(`/img/character-left-${imgCnt}.png`);
       if (keyPressed.up) {
         setPosition({ ...position, x: position.x - 20, y: position.y - 20 });
       } else if (keyPressed.down) {
@@ -83,9 +83,9 @@ export default function Character() {
       }
       setImgCnt((imgCnt + 1) % 4);
       if (dir === 1) {
-        setImg(`/img/character-right-${imgCnt}-high.png`);
+        setImg(`/img/character-right-${imgCnt}.png`);
       } else {
-        setImg(`/img/character-left-${imgCnt}-high.png`);
+        setImg(`/img/character-left-${imgCnt}.png`);
       }
       if (keyPressed.right) {
         setPosition({ ...position, x: position.x + 20, y: position.y + 20 });
@@ -106,9 +106,9 @@ export default function Character() {
       }
       setImgCnt((imgCnt + 1) % 4);
       if (dir === 1) {
-        setImg(`/img/character-right-${imgCnt}-high.png`);
+        setImg(`/img/character-right-${imgCnt}.png`);
       } else {
-        setImg(`/img/character-left-${imgCnt}-high.png`);
+        setImg(`/img/character-left-${imgCnt}.png`);
       }
       if (keyPressed.right) {
         setPosition({ ...position, x: position.x + 20, y: position.y - 20 });
@@ -123,22 +123,22 @@ export default function Character() {
       const intro = document.getElementById('intro');
       if (intro) intro.scrollIntoView({ behavior: 'smooth' });
       setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
-      setImg('/img/character-standing-high.png');
+      setImg('/img/character-standing.png');
     } else if (position.y <= heightMax.current * 0.3 && position.x >= widthMax.current * 0.8) {
       const project = document.getElementById('project');
       if (project) project.scrollIntoView({ behavior: 'smooth' });
       setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
-      setImg('/img/character-standing-high.png');
+      setImg('/img/character-standing.png');
     } else if (position.y >= heightMax.current * 0.7 && position.x <= widthMax.current * 0.15) {
       const skillStack = document.getElementById('skillStack');
       if (skillStack) skillStack.scrollIntoView({ behavior: 'smooth' });
       setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
-      setImg('/img/character-standing-high.png');
+      setImg('/img/character-standing.png');
     } else if (position.y >= heightMax.current * 0.7 && position.x >= widthMax.current * 0.8) {
       const contact = document.getElementById('contact');
       if (contact) contact.scrollIntoView({ behavior: 'smooth' });
       setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
-      setImg('/img/character-standing-high.png');
+      setImg('/img/character-standing.png');
     }
   };
 
@@ -163,11 +163,17 @@ export default function Character() {
     <Container ref={containerRef}>
       <CharacterContainer style={{ left: `${position.x}px`, top: `${position.y}px` }}>
         <Nickname>영기</Nickname>
-        <Image src={img} alt='character' width='100' height='100' />
+        <ImgContainer>
+          <Image src={img} alt='character' width='100' height='100' />
+        </ImgContainer>
       </CharacterContainer>
     </Container>
   );
 }
+
+const ImgContainer = styled.div`
+  image-rendering: crisp-edges;
+`;
 
 const Nickname = styled.div`
   background-color: white;
