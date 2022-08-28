@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export default function Character() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [img, setImg] = useState('/img/character-standing.png');
+  const [img, setImg] = useState('/myCharacter/idle0.svg');
   const [dir, setDir] = useState(0); //0 -> stand, 1 -> right, 2 -> left
   const [imgCnt, setImgCnt] = useState(0); // 0, 1, 2, 3
   const [keyPressed, setKeyPressed] = useState({ right: 0, left: 0, up: 0, down: 0 });
@@ -38,12 +38,12 @@ export default function Character() {
         return;
       }
       if (dir === 1) {
-        setImgCnt((imgCnt + 1) % 4);
+        setImgCnt((imgCnt + 1) % 8);
       } else {
         setDir(1);
         setImgCnt(0);
       }
-      setImg(`/img/character-right-${imgCnt}.png`);
+      setImg(`/myCharacter/run${imgCnt}.svg`);
       if (keyPressed.down) {
         setPosition({ ...position, x: position.x + 20, y: position.y + 20 });
       } else if (keyPressed.up) {
@@ -58,12 +58,12 @@ export default function Character() {
       }
 
       if (dir === 2) {
-        setImgCnt((imgCnt + 1) % 4);
+        setImgCnt((imgCnt + 1) % 8);
       } else {
         setDir(2);
         setImgCnt(0);
       }
-      setImg(`/img/character-left-${imgCnt}.png`);
+      setImg(`/myCharacter/run${imgCnt}.svg`);
       if (keyPressed.up) {
         setPosition({ ...position, x: position.x - 20, y: position.y - 20 });
       } else if (keyPressed.down) {
@@ -81,12 +81,8 @@ export default function Character() {
         setDir(1);
         setImgCnt(-1);
       }
-      setImgCnt((imgCnt + 1) % 4);
-      if (dir === 1) {
-        setImg(`/img/character-right-${imgCnt}.png`);
-      } else {
-        setImg(`/img/character-left-${imgCnt}.png`);
-      }
+      setImgCnt((imgCnt + 1) % 8);
+      setImg(`/myCharacter/run${imgCnt}.svg`);
       if (keyPressed.right) {
         setPosition({ ...position, x: position.x + 20, y: position.y + 20 });
       } else if (keyPressed.left) {
@@ -104,11 +100,11 @@ export default function Character() {
         setDir(1);
         setImgCnt(-1);
       }
-      setImgCnt((imgCnt + 1) % 4);
+      setImgCnt((imgCnt + 1) % 8);
       if (dir === 1) {
-        setImg(`/img/character-right-${imgCnt}.png`);
+        setImg(`/myCharacter/run${imgCnt}.svg`);
       } else {
-        setImg(`/img/character-left-${imgCnt}.png`);
+        setImg(`/myCharacter/run${imgCnt}.svg`);
       }
       if (keyPressed.right) {
         setPosition({ ...position, x: position.x + 20, y: position.y - 20 });
@@ -119,26 +115,27 @@ export default function Character() {
       }
     }
 
+    const reset = () => {
+      setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
+      setImg('/myCharacter/idle0.svg');
+    };
+
     if (position.y <= heightMax.current * 0.3 && position.x <= widthMax.current * 0.15) {
       const intro = document.getElementById('intro');
       if (intro) intro.scrollIntoView({ behavior: 'smooth' });
-      setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
-      setImg('/img/character-standing.png');
+      reset();
     } else if (position.y <= heightMax.current * 0.3 && position.x >= widthMax.current * 0.8) {
       const project = document.getElementById('project');
       if (project) project.scrollIntoView({ behavior: 'smooth' });
-      setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
-      setImg('/img/character-standing.png');
+      reset();
     } else if (position.y >= heightMax.current * 0.7 && position.x <= widthMax.current * 0.15) {
       const skillStack = document.getElementById('skillStack');
       if (skillStack) skillStack.scrollIntoView({ behavior: 'smooth' });
-      setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
-      setImg('/img/character-standing.png');
+      reset();
     } else if (position.y >= heightMax.current * 0.7 && position.x >= widthMax.current * 0.8) {
       const contact = document.getElementById('contact');
       if (contact) contact.scrollIntoView({ behavior: 'smooth' });
-      setPosition({ x: widthMax.current / 2 - 50, y: heightMax.current / 2 - 50 });
-      setImg('/img/character-standing.png');
+      reset();
     }
   };
 
@@ -163,16 +160,16 @@ export default function Character() {
     <Container ref={containerRef}>
       <CharacterContainer style={{ left: `${position.x}px`, top: `${position.y}px` }}>
         <Nickname>영기</Nickname>
-        <ImgContainer>
-          <Image src={img} alt='character' width='100' height='100' />
+        <ImgContainer direct={dir}>
+          <Image src={img} alt='character' width='150' height='150' />
         </ImgContainer>
       </CharacterContainer>
     </Container>
   );
 }
 
-const ImgContainer = styled.div`
-  image-rendering: crisp-edges;
+const ImgContainer = styled.div<{ direct: number }>`
+  transform: ${(props) => (props.direct === 2 ? 'scale(-3, 3)' : 'scale(3, 3)')};
 `;
 
 const Nickname = styled.div`
